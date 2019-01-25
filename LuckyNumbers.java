@@ -3,36 +3,15 @@ import java.util.*;
 public class LuckyNumbers {
 
 	public static void main(String[] args) {
-		Integer a = new Integer(20);
-		Integer b = new Integer(25);
-		int count = 0;
-		for(int i = a; i <= b; i++) {
-			ArrayList<Integer> numbers = ExtractNumbers(i);
-			ArrayList<Integer> numberSquared = SquareNumbers(numbers);
-			int sumDigits = 0, sumDigitSq = 0;
-			sumDigits = ReturnSum(numbers);
-			sumDigitSq = ReturnSum(numberSquared);
-			if(sumDigits <= 1 || sumDigitSq <= 1) {
-				continue;
-			}
-			else {
-				if((CheckPrime(sumDigits) && CheckPrime(sumDigitSq)) == true) {
-					count++;
-				}
-			}
-		}
-		System.out.println(count);
+		Integer a = new Integer(1);
+		Integer b = new Integer(20);
+		System.out.println(ReturnCount(a, b));
 	}
 	
 	public static ArrayList<Integer> ExtractNumbers(int number){
 		ArrayList<Integer> array = new ArrayList<>();
-		Integer num = -1;
 		while(number > 0) {
-			num = number % 10;
-			if(num < 0) 
-				continue;
-			else
-				array.add(num);
+			array.add(number % 10);
 			number = number / 10;
 		}
 		return array;
@@ -65,7 +44,23 @@ public class LuckyNumbers {
 		return sum;
 	}
 	
-	public void PrintNumber(int number) {
-		System.out.println(number);
+	public static int ReturnCount(int a, int b) {
+		int count = 0;
+		for(int i = a; i <= b; i++) {
+			ArrayList<Integer> numbers = ExtractNumbers(i);
+			ArrayList<Integer> numberSquared = SquareNumbers(numbers);
+			int sumDigits = 0, sumDigitSq = 0;
+			sumDigits = ReturnSum(numbers);
+			sumDigitSq = ReturnSum(numberSquared);
+			if(sumDigits <= 1 || sumDigitSq <= 1) {
+				continue;
+			}
+			else {
+				if((CheckPrime(sumDigits) && CheckPrime(sumDigitSq)) == true) {
+					count++;
+				}
+			}
+		}
+		return count;
 	}
 }
